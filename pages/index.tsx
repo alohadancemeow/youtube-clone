@@ -1,9 +1,11 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
+import { GlobalStyles } from '../styles/GlobalStyles'
 
 import Menu from '../conponents/Menu'
-import Navbar from '../conponents/Navbar'
+import Navbar from '../conponents/Nav'
+import Content from '../conponents/Content'
 
 import { darkTheme, lightTheme } from '../styles/my-theme'
 
@@ -15,12 +17,13 @@ const Home: NextPage = () => {
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <GlobalStyles />
       <Container>
         <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
         <Main>
           <Navbar />
           <Wrapper>
-            Video cards
+            <Content />
           </Wrapper>
         </Main>
       </Container>

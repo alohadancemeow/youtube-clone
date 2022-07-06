@@ -4,6 +4,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  optimizeFonts: false,
 }
 
 module.exports = nextConfig

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import styled from 'styled-components'
 import Link from 'next/link';
 
+// icons
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
@@ -19,6 +19,19 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 
+// ui compoents
+import {
+  Container,
+  Button,
+  Hr,
+  Img,
+  Item,
+  Login,
+  Logo,
+  Title,
+  Wrapper
+} from './styles'
+
 type Props = {
   darkMode: boolean
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
@@ -31,7 +44,7 @@ const Menu: FC<Props> = ({ darkMode, setDarkMode }: Props) => {
 
         <Logo>
           <Img src='/logo.png' />
-          Youtube-demo
+          You Noob
         </Logo>
 
         <Item>
@@ -68,7 +81,7 @@ const Menu: FC<Props> = ({ darkMode, setDarkMode }: Props) => {
         </Login>
 
         <Hr />
-        {/* <Title>BEST OF LAMATUBE</Title> */}
+        <Title>MORE FROM YOUTUBE</Title>
         <Item>
           <LibraryMusicOutlinedIcon />
           Music
@@ -120,55 +133,3 @@ const Menu: FC<Props> = ({ darkMode, setDarkMode }: Props) => {
 }
 
 export default Menu
-
-const Container = styled.div`
-  flex: 1;
-  background-color: ${({ theme }) => theme.bg};
-  height: 100vh;
-  color: ${({ theme }) => theme.text};
-  font-size: 14px;
-  position: sticky;
-  top: 0;
-`
-const Wrapper = styled.div`
-  padding: 18px 26px;
-`
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: bold;
-  margin-bottom: 25px;
-  width: max-content;
-`
-const Img = styled.img`
-  height: 25px;
-`
-const Item = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
-  padding: 7.5px;
-`
-const Hr = styled.hr`
-  margin: 15px 0;
-  border: 0.5px solid ${({ theme }) => theme.soft};
-`
-const Login = styled.div`
-
-`
-const Button = styled.button`
-  padding: 5px 15px;
-  background-color: transparent;
-  border: 1px solid #3ea6ff;
-  color: #3ea6ff;
-  border-radius: 3px;
-  font-weight: 500;
-  margin-top: 10px;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`
