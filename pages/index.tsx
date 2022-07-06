@@ -1,20 +1,30 @@
 import type { NextPage } from 'next'
-import styled from 'styled-components'
+import { useState } from 'react'
+import styled, { ThemeProvider } from 'styled-components'
 
 import Menu from '../conponents/Menu'
 import Navbar from '../conponents/Navbar'
 
+import { darkTheme, lightTheme } from '../styles/my-theme'
+
 const Home: NextPage = () => {
+
+  const [darkMode, setDarkMode] = useState(false)
+  console.log(darkMode);
+
+
   return (
-    <Container>
-      <Menu />
-      <Main>
-        <Navbar />
-        <Wrapper>
-          Video cards
-        </Wrapper>
-      </Main>
-    </Container>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <Container>
+        <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Main>
+          <Navbar />
+          <Wrapper>
+            Video cards
+          </Wrapper>
+        </Main>
+      </Container>
+    </ThemeProvider>
   )
 }
 
@@ -28,6 +38,7 @@ const Container = styled.div`
 
 const Main = styled.div`
   flex: 7;
+  background-color: ${({ theme }) => theme.bg};
 `
 const Wrapper = styled.div`
   padding: 22px 96px;

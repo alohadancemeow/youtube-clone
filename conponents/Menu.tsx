@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link';
 
@@ -19,9 +19,12 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 
-type Props = {}
+type Props = {
+  darkMode: boolean
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const Menu = (props: Props) => {
+const Menu: FC<Props> = ({ darkMode, setDarkMode }: Props) => {
   return (
     <Container>
       <Wrapper>
@@ -105,11 +108,10 @@ const Menu = (props: Props) => {
         </Item>
 
         <Item
-        // onClick={() => setDarkMode(!darkMode)}
+          onClick={() => setDarkMode(!darkMode)}
         >
           <SettingsBrightnessOutlinedIcon />
-          {/* {darkMode ? "Light" : "Dark"} */}
-          Mode
+          {darkMode ? "Light" : "Dark"} Mode
         </Item>
 
       </Wrapper>
@@ -121,9 +123,9 @@ export default Menu
 
 const Container = styled.div`
   flex: 1;
-  background-color: #202020;
+  background-color: ${({ theme }) => theme.bg};
   height: 100vh;
-  color: white;
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   position: sticky;
   top: 0;
@@ -151,7 +153,7 @@ const Item = styled.div`
 `
 const Hr = styled.hr`
   margin: 15px 0;
-  border: 0.5px solid #373737;
+  border: 0.5px solid ${({ theme }) => theme.soft};
 `
 const Login = styled.div`
 
