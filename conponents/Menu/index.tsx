@@ -32,25 +32,31 @@ import {
   Wrapper
 } from './styles'
 
-type Props = {
-  darkMode: boolean
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
-}
+import { useStore } from '../../state/store'
 
-const Menu: FC<Props> = ({ darkMode, setDarkMode }: Props) => {
+
+const Menu: FC = () => {
+
+  const darkMode = useStore((state) => state.darkMode)
+  const setDarkMode = useStore((state) => state.setDarkMode)
+
   return (
     <Container>
       <Wrapper>
 
-        <Logo>
-          <Img src='/logo.png' />
-          You Noob
-        </Logo>
+        <Link href={'/'}>
+          <Logo>
+            <Img src='/logo.png' />
+            You Noob
+          </Logo>
+        </Link>
 
-        <Item>
-          <HomeIcon />
-          Home
-        </Item>
+        <Link href={'/'}>
+          <Item>
+            <HomeIcon />
+            Home
+          </Item>
+        </Link>
         <Item>
           <ExploreOutlinedIcon />
           Explore
@@ -121,7 +127,7 @@ const Menu: FC<Props> = ({ darkMode, setDarkMode }: Props) => {
         </Item>
 
         <Item
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={setDarkMode}
         >
           <SettingsBrightnessOutlinedIcon />
           {darkMode ? "Light" : "Dark"} Mode

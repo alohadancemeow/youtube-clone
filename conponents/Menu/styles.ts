@@ -18,6 +18,7 @@ export const Logo = styled.div`
   gap: 5px;
   font-weight: bold;
   margin-bottom: 25px;
+  cursor: pointer;
   /* width: max-content; */
 `
 export const Img = styled.img`

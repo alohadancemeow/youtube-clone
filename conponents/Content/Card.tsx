@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -6,10 +7,12 @@ type Props = {}
 const Card = (props: Props) => {
     return (
         <Container>
-            <Image
-                src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA"
-                alt='thumbnail-image'
-            />
+            <Link href={'/video'}>
+                <Image
+                    src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA"
+                    alt='thumbnail-image'
+                />
+            </Link>
             <Details>
                 <ChannelImage
                     src='/channel-logo.jpg'
