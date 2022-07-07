@@ -37,6 +37,7 @@ import { useStore } from '../../state/store'
 
 const Menu: FC = () => {
 
+
   const darkMode = useStore((state) => state.darkMode)
   const setDarkMode = useStore((state) => state.setDarkMode)
 
@@ -130,7 +131,8 @@ const Menu: FC = () => {
           onClick={setDarkMode}
         >
           <SettingsBrightnessOutlinedIcon />
-          {darkMode ? "Light" : "Dark"} Mode
+          {/* {darkMode ? "Light" : "Dark"} Mode */}
+          Switch Mode
         </Item>
 
       </Wrapper>
