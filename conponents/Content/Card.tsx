@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 type Props = {
     type?: string | undefined
@@ -22,9 +23,13 @@ const Card: FC<Props> = ({ type }: Props) => {
                     alt='channel-image'
                     type={type}
                 />
+
                 <Texts>
                     <Title>Test Video</Title>
-                    <ChannelName>alohadancemeow</ChannelName>
+                    <ChannelName>
+                        alohadancemeow
+                        <CheckCircleIcon style={{ fontSize: '16px' }} />
+                    </ChannelName>
                     <Info>1M views • 1 day ago</Info>
                 </Texts>
             </Details>
@@ -73,6 +78,9 @@ const ChannelName = styled.div`
     font-size: 14px;
     color: ${({ theme }) => theme.textSoft};
     margin: 9px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 `
 const Info = styled.div`
     font-size: 14px;

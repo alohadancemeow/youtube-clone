@@ -67,6 +67,9 @@ export const ChannelDetail = styled.div`
 
 export const ChannelName = styled.span`
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 export const ChannelCounter = styled.span`
@@ -82,7 +85,8 @@ export const Description = styled.p`
 
 export const Subscribe = styled.button`
   background-color: #cc1a00;
-  font-weight: 500;
+  font-weight: bold;
+  font-size: 15px;
   color: white;
   border: none;
   border-radius: 3px;

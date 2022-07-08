@@ -6,6 +6,7 @@ import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutl
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // ui components
 import {
@@ -77,7 +78,10 @@ const VideoContent = (props: Props) => {
                     <ChannelInfo>
                         <Image src="/channel-logo.jpg" />
                         <ChannelDetail>
-                            <ChannelName>Hu Tao Ch.</ChannelName>
+                            <ChannelName>
+                                alohadancemeow
+                                <CheckCircleIcon style={{fontSize: '18px'}} />
+                                </ChannelName>
                             <ChannelCounter>1M subscribers</ChannelCounter>
                             <Description>
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
