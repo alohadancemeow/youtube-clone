@@ -4,7 +4,6 @@ import React from 'react'
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
-import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
@@ -31,6 +30,7 @@ import {
 } from './styles'
 
 import Comments from '../Comments'
+import Card from '../Content/Card';
 
 type Props = {}
 
@@ -95,7 +95,12 @@ const VideoContent = (props: Props) => {
 
             </Content>
 
-            <Recommendation>Recommendtaion</Recommendation>
+            <Recommendation>
+                {Array(15).fill(null).map((_, index) => (
+                    <Card key={index} type="sm" />
+                ))}
+            </Recommendation>
+
         </Container>
     )
 }
