@@ -25,7 +25,6 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 // ui compoents
 import {
   Container,
-  Button,
   Hr,
   Img,
   Item,
@@ -35,7 +34,9 @@ import {
   Wrapper,
   Logout
 } from './styles'
+import { Button } from '../element-styles';
 
+// state
 import { useStore } from '../../state/store'
 
 
