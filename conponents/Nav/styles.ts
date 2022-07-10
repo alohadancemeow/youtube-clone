@@ -31,6 +31,11 @@ export const Search = styled.div`
   border-radius: 3px;
 `;
 
+export const SearchButton = styled.div`
+  background-color: ${({ theme }) => theme.textSoft};
+  color: ${({ theme }) => theme.text};
+`
+
 export const Input = styled.input`
   border: none;
   background-color: transparent;
