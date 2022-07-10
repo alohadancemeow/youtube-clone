@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useSession } from 'next-auth/react'
+
 import {
   Avatar,
   Container,
@@ -22,6 +24,8 @@ type Comment = {
 
 const index = (props: Props) => {
 
+  const { data: session } = useSession()
+
   const Comment = ({ image, message, name }: Comment) => (
     <CommentContainer>
       <Avatar src={image} alt={name} />
@@ -38,7 +42,7 @@ const index = (props: Props) => {
   return (
     <Container>
       <NewComment>
-        <Avatar src="/user.jpg" />
+        <Avatar src={session?.user?.image!} />
         <Input placeholder="Add a comment..." />
       </NewComment>
       <Comment name='Hutao' image='/channel-logo.jpg' message='I am Hutao, I love Qiqi <3' />

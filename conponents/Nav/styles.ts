@@ -4,6 +4,7 @@ export const Container = styled.div`
   position: sticky;
   top: 0;
   background-color: ${({ theme }) => theme.bgLighter};
+  color: ${({ theme }) => theme.text};
   height: 56px;
 `;
 
@@ -48,4 +49,16 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* color: ${({ theme }) => theme.text}; */
+`
+export const Avatar = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 `;

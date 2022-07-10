@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import Link from 'next/link';
 
+import { useSession, signIn, signOut } from "next-auth/react"
+
 // icons
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
@@ -18,6 +20,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 // ui compoents
 import {
@@ -29,7 +32,8 @@ import {
   Login,
   Logo,
   Title,
-  Wrapper
+  Wrapper,
+  Logout
 } from './styles'
 
 import { useStore } from '../../state/store'
@@ -37,9 +41,10 @@ import { useStore } from '../../state/store'
 
 const Menu: FC = () => {
 
-
   const darkMode = useStore((state) => state.darkMode)
   const setDarkMode = useStore((state) => state.setDarkMode)
+
+  const { data: session } = useSession()
 
   return (
     <Container>
@@ -77,15 +82,28 @@ const Menu: FC = () => {
         </Item>
 
         <Hr />
-        <Login>
-          Sign in to like videos, comment, and subscribe.
-          {/* <Link to="signin" style={{ textDecoration: "none" }}> */}
-          <Button>
-            <AccountCircleOutlinedIcon />
-            SIGN IN
-          </Button>
-          {/* </Link> */}
-        </Login>
+        {!session
+          ? (
+            <Login>
+              Sign in to like videos, comment, and subscribe.
+              <Button onClick={() => signIn()}>
+                <AccountCircleOutlinedIcon />
+                SIGN IN
+              </Button>
+            </Login>
+          ) : (
+            <Logout>
+              Signed in as {session.user?.email}
+              <Button
+                onClick={() => signOut()}
+                style={{ color: 'red', border: '1px solid red' }}
+              >
+                <ExitToAppIcon />
+                SIGN OUT
+              </Button>
+            </Logout>
+          )
+        }
 
         <Hr />
         <Title>MORE FROM YOUTUBE</Title>

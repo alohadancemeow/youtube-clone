@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 // icons
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -11,12 +11,17 @@ import {
   Button,
   Input,
   Search,
-  Wrapper
+  Wrapper,
+  Avatar,
+  UserInfo
 } from './styles'
 
 type Props = {}
 
 const Navbar = (props: Props) => {
+
+  const { data: session } = useSession()
+
   return (
     <Container>
       <Wrapper>
@@ -24,12 +29,19 @@ const Navbar = (props: Props) => {
           <Input placeholder="Search" />
           <SearchOutlinedIcon />
         </Search>
-        {/* <Link to="signin" style={{ textDecoration: "none" }}> */}
-        <Button>
-          <AccountCircleOutlinedIcon />
-          SIGN IN
-        </Button>
-        {/* </Link> */}
+        {!session
+          ? (
+            <Button>
+              <AccountCircleOutlinedIcon />
+              SIGN IN
+            </Button>
+          ) : (
+            <UserInfo>
+              <Avatar src={session.user?.image!} alt={session.user?.name!} />
+              <span>{session.user?.name!}</span>
+            </UserInfo>
+          )
+        }
       </Wrapper>
     </Container>
   )
