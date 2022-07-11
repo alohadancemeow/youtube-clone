@@ -1,14 +1,18 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type ThemeMode = {
+type AppState = {
     darkMode: boolean,
-    setDarkMode: () => void
+    setDarkMode: () => void,
+    open: boolean,
+    setOpen: () => void
 }
 
-const store = persist<ThemeMode>((set) => ({
+const store = persist<AppState>((set) => ({
     darkMode: false,
-    setDarkMode: () => set((state) => ({ darkMode: !state.darkMode }))
+    setDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
+    open: false,
+    setOpen: () => set((state) => ({ open: !state.open }))
 }),
     {
         name: 'my-theme', // unique name

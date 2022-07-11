@@ -28,6 +28,7 @@ import { useStore } from '../../state/store';
 
 // ui componets
 import { Button } from '../element-styles'
+import Link from 'next/link';
 
 
 const darkTheme = createTheme({
@@ -43,8 +44,9 @@ type Props = {}
 
 const Navbar = (props: Props) => {
 
-  const darkMode = useStore((state) => state.darkMode)
   const { data: session } = useSession()
+  const darkMode = useStore((state) => state.darkMode)
+  const setOpen = useStore((state) => state.setOpen)
 
 
   return (
@@ -62,13 +64,22 @@ const Navbar = (props: Props) => {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+              onClick={setOpen}
             >
               <MenuIcon />
             </IconButton>
+
             <YouTubeIcon color='error' fontSize='large' />
-            <Typography alignContent={'baseline'} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              YouNoob
-            </Typography>
+            <Link href={'/'}>
+              <Typography
+                alignContent={'baseline'}
+                variant="h6" component="div"
+                sx={{ flexGrow: 1 }}
+                style={{ cursor: 'pointer' }}
+              >
+                YouNoob
+              </Typography>
+            </Link>
 
             <Search>
               <SearchIconWrapper>

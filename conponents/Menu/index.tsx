@@ -1,161 +1,146 @@
 import React, { FC } from 'react'
 import Link from 'next/link';
 
+import { useStore } from '../../state/store'
 import { useSession, signIn, signOut } from "next-auth/react"
+import { mainMenu, subMenu, moreMenu, subscriptionsMenu, settingMenu } from './MenuData'
 
 // icons
-import HomeIcon from '@mui/icons-material/Home';
-import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
-import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
-import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
-import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
-import LibraryMusicOutlinedIcon from "@mui/icons-material/LibraryMusicOutlined";
-import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
-import SportsBasketballOutlinedIcon from "@mui/icons-material/SportsBasketballOutlined";
-import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 // ui compoents
-import {
-  Container,
-  Hr,
-  Img,
-  Item,
-  Login,
-  Logo,
-  Title,
-  Wrapper,
-  Logout
-} from './styles'
+import { Title, Wrapper } from './styles'
 import { Button } from '../element-styles';
 
-// state
-import { useStore } from '../../state/store'
+// mui
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 
 const Menu: FC = () => {
 
   const darkMode = useStore((state) => state.darkMode)
   const setDarkMode = useStore((state) => state.setDarkMode)
+  const open = useStore((state) => state.open)
+  const setOpen = useStore((state) => state.setOpen)
 
   const { data: session } = useSession()
 
-  return (
-    <Container>
+  const LoginSection = () => (
+    <div>
+      Sign in to like videos, comment, and subscribe.
+      <Button onClick={() => signIn()}>
+        <AccountCircleOutlinedIcon />
+        SIGN IN
+      </Button>
+    </div>
+
+  )
+  const LogoutSection = () => (
+    <div>
+      Signed in as {session && session.user?.email}
+      <Button
+        onClick={() => signOut()}
+        style={{ color: 'red', border: '1px solid red' }}
+      >
+        <ExitToAppIcon />
+        SIGN OUT
+      </Button>
+    </div>
+  )
+
+
+  const OpenedDrawer = () => (
+    <Box
+      sx={{ width: 250 }}
+    >
+      <List>
+        {mainMenu.map(({ name, icon }, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {subMenu.map(({ name, icon }, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+
       <Wrapper>
-
-        <Link href={'/'}>
-          <Logo>
-            <Img src='/logo.png' />
-            You Noob
-          </Logo>
-        </Link>
-
-        <Link href={'/'}>
-          <Item>
-            <HomeIcon />
-            Home
-          </Item>
-        </Link>
-        <Item>
-          <ExploreOutlinedIcon />
-          Explore
-        </Item>
-        <Item>
-          <SubscriptionsOutlinedIcon />
-          Subscriptions
-        </Item>
-        <Hr />
-        <Item>
-          <VideoLibraryOutlinedIcon />
-          Library
-        </Item>
-        <Item>
-          <HistoryOutlinedIcon />
-          History
-        </Item>
-
-        <Hr />
         {!session
-          ? (
-            <Login>
-              Sign in to like videos, comment, and subscribe.
-              <Button onClick={() => signIn()}>
-                <AccountCircleOutlinedIcon />
-                SIGN IN
-              </Button>
-            </Login>
-          ) : (
-            <Logout>
-              Signed in as {session.user?.email}
-              <Button
-                onClick={() => signOut()}
-                style={{ color: 'red', border: '1px solid red' }}
-              >
-                <ExitToAppIcon />
-                SIGN OUT
-              </Button>
-            </Logout>
-          )
+          ? <LoginSection />
+          : <LogoutSection />
         }
-
-        <Hr />
-        <Title>MORE FROM YOUTUBE</Title>
-        <Item>
-          <LibraryMusicOutlinedIcon />
-          Music
-        </Item>
-        <Item>
-          <SportsBasketballOutlinedIcon />
-          Sports
-        </Item>
-        <Item>
-          <SportsEsportsOutlinedIcon />
-          Gaming
-        </Item>
-        <Item>
-          <MovieOutlinedIcon />
-          Movies
-        </Item>
-        <Item>
-          <ArticleOutlinedIcon />
-          News
-        </Item>
-        <Item>
-          <LiveTvOutlinedIcon />
-          Live
-        </Item>
-        <Hr />
-        <Item>
-          <SettingsOutlinedIcon />
-          Settings
-        </Item>
-        <Item>
-          <FlagOutlinedIcon />
-          Report
-        </Item>
-        <Item>
-          <HelpOutlineOutlinedIcon />
-          Help
-        </Item>
-
-        <Item
-          onClick={setDarkMode}
-        >
-          <SettingsBrightnessOutlinedIcon />
-          {/* {darkMode ? "Light" : "Dark"} Mode */}
-          Switch Mode
-        </Item>
-
       </Wrapper>
-    </Container>
+      <Divider />
+
+      <Wrapper>
+        <Title>More from younoob</Title>
+      </Wrapper>
+      <List>
+        {moreMenu.map(({ name, icon }, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+
+      <List>
+        {settingMenu.map(({ name, icon }, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton onClick={setDarkMode}>
+            <ListItemIcon><SettingsBrightnessOutlinedIcon /></ListItemIcon>
+            <ListItemText>Switch Mode</ListItemText>
+          </ListItemButton>
+        </ListItem>
+      </List>
+
+    </Box>
+  )
+
+  return (
+    <div>
+      <Drawer
+        anchor={'left'}
+        open={open}
+        onClose={setOpen}
+      >
+        <OpenedDrawer />
+      </Drawer>
+    </div>
   )
 }
 
